@@ -1,11 +1,11 @@
 version: "3.7"
 services:
   photostructure:
-    platform: linux/arm64
+    #platform: linux/arm64
     
     # You can run alpha, beta, or stable builds. See
     # <https://forum.photostructure.com/t/274> for details.
-    image: photostructure/server:stable
+    image: photostructure/server
     container_name: photostructure
 
     # See https://docs.docker.com/compose/compose-file/#restart
@@ -78,6 +78,7 @@ services:
       - "PS_EXPOSE_NETWORK_WITHOUT_AUTH=true"
       - "PS_TRANSCODE_VIDEOS=false"
       - "PS_CPU_LOAD_PERCENT=50"
+      - "PS_QUICK_SYNC_MODE=true"
 
 volumes:
   photostructure_data:
