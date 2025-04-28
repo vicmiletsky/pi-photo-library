@@ -79,7 +79,8 @@ services:
       - "PS_TRANSCODE_VIDEOS=false"
       - "PS_QUICK_SYNC_MODE=true"
       - "PS_MAX_SYNC_FILE_JOBS=2"
-      - "PS_SHARP_THREADS_PER_JOB=2"
+      - "PS_SHARP_THREADS_PER_JOB=1"
+      - "PS_CPU_LOAD_PERCENT=150"
 
 volumes:
   photostructure_data:
