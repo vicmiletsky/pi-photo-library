@@ -77,7 +77,7 @@ services:
       - "PGID=1000" # < CHANGE THIS LINE: replace 1000 with the result of `id -g`
       - "PS_EXPOSE_NETWORK_WITHOUT_AUTH=true"
       - "PS_TRANSCODE_VIDEOS=false"
-      - "PS_CPU_LOAD_PERCENT=50"
+      - "PS_CPU_LOAD_PERCENT=99"
       - "PS_QUICK_SYNC_MODE=true"
 
 volumes:
