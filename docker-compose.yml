@@ -5,7 +5,7 @@ services:
     
     # You can run alpha, beta, or stable builds. See
     # <https://forum.photostructure.com/t/274> for details.
-    image: photostructure/server
+    image: photostructure/server:alpha
     container_name: photostructure
 
     # See https://docs.docker.com/compose/compose-file/#restart
