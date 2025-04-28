@@ -15,23 +15,26 @@ services:
     stop_grace_period: 2m
 
     volumes:
+      - /mnt/Seagate8TB/Photo:/ps/library
+      - photostructure_data:/ps/config
+    
       # /ps/library is where your PhotoStructure Library will be stored.
       # It must be readable, writable, and have sufficient free space.
       # If it is a remote volume, uncomment the PS_FORCE_LOCAL_DB_REPLICA
       # environment line below.
 
-      - type: bind
-        source: /mnt/Seagate8TB/Photo
-        target: /ps/library
+     # - type: bind
+     #   source: /mnt/Seagate8TB/Photo
+      #  target: /ps/library
 
       # NOTE: if /ps/library is a fast local disk, you can delete 
       # the other /ps/... bind mounts below.
 
       # /ps/config stores your "system settings"
 
-      - type: bind
-        source: photostructure_data
-        target: /ps/config
+      #- type: bind
+      #  source: photostructure_data
+      #  target: /ps/config
 
       # Example additional directories to import into your library.
       # Add as many as you'd like, or remove one or both of these examples.
