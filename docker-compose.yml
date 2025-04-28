@@ -77,8 +77,9 @@ services:
       - "PGID=1000" # < CHANGE THIS LINE: replace 1000 with the result of `id -g`
       - "PS_EXPOSE_NETWORK_WITHOUT_AUTH=true"
       - "PS_TRANSCODE_VIDEOS=false"
-      - "PS_CPU_LOAD_PERCENT=99"
       - "PS_QUICK_SYNC_MODE=true"
+      - "PS_MAX_SYNC_FILE_JOBS=2"
+      - "PS_MAX_SYNC_FILE_JOBS=2"
 
 volumes:
   photostructure_data:
