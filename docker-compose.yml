@@ -1,0 +1,79 @@
+version: "3.7"
+services:
+  photostructure:
+    # You can run alpha, beta, or stable builds. See
+    # <https://forum.photostructure.com/t/274> for details.
+    image: photostructure/server:stable
+    container_name: photostructure
+
+    # See https://docs.docker.com/compose/compose-file/#restart
+    restart: unless-stopped
+
+    # PhotoStructure needs some time to close the database cleanly.
+    # (It should normally only take seconds, but 2m accounts for
+    # a spun-down, remote, old HDD hosting a very large library):
+    stop_grace_period: 2m
+
+    volumes:
+      # /ps/library is where your PhotoStructure Library will be stored.
+      # It must be readable, writable, and have sufficient free space.
+      # If it is a remote volume, uncomment the PS_FORCE_LOCAL_DB_REPLICA
+      # environment line below.
+
+      - type: bind
+        source: /mnt/Seagate8TB/Photo
+        target: /ps/library
+
+      # NOTE: if /ps/library is a fast local disk, you can delete 
+      # the other /ps/... bind mounts below.
+
+      # /ps/config stores your "system settings"
+
+      - type: bind
+        source: photostructure_data
+        target: /ps/config
+
+      # Example additional directories to import into your library.
+      # Add as many as you'd like, or remove one or both of these examples.
+
+      # Set the target to /media/... or /mnt/...
+      # (the name doesn't matter, as long as it is unique)
+
+      #- type: bind
+      #  source: "/mnt/Photos backup" # < CHANGE THIS LINE
+      #  target: /var/photos-backup
+
+      # Here's another example directory to scan:
+      # - type: bind
+      #   source: /home/jamie/Pictures
+      #   target: /var/home-jamie-pictures
+
+    ports:
+      - 1787:1787/tcp
+
+    environment:
+      # PhotoStructure has _tons_ of settings. See
+      # <https://photostructure.com/faq/environment-variables/>
+
+      # This tells PhotoStructure to only log errors, which is the default:
+      # - "PS_LOG_LEVEL=error"
+
+      # If PhotoStructure is refusing to spin up, uncomment these lines to see what's going on:
+      # - "PS_LOG_LEVEL=info"
+      # - "PS_LOG_STDOUT=true"
+
+      # This is your local timezone, and is used for assets that are missing timezone data. 
+      # See <https://en.wikipedia.org/wiki/List_of_tz_database_time_zones>
+      - "TZ=Europe/Kyiv" # < CHANGE THIS LINE
+
+      # The userid and groupid to run PhotoStructure as.
+      # See <https://phstr.com/puid> for details
+      - "PUID=1000" # < CHANGE THIS LINE: replace 1000 with the result of `id -u`
+      - "PGID=1000" # < CHANGE THIS LINE: replace 1000 with the result of `id -g`
+      - "PS_EXPOSE_NETWORK_WITHOUT_AUTH=true"
+      - "PS_TRANSCODE_VIDEOS=false"
+      - "PS_CPU_LOAD_PERCENT=50"
+
+volumes:
+  photostructure_data:
+      
